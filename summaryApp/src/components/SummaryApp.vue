@@ -20,3 +20,35 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import {ref} from 'vue'
+import axios from 'axios'
+
+const selectedFile = ref(null)
+const isLoading = ref(false)
+const error = ref(null)
+const summary = ref(null)
+const apiToken = 'APY0w0DZ5FAewhBoIhW5WsgxbIQY7iLe970UZ7VwQFBpkAE63kwW7UKbQFxfdfigh'
+
+const handleFileUpload = (event) => {
+    selectedFile.value = event.target.files[0]
+    error.value = null
+    summary.value = null
+}
+
+const summarizeDocument = async() => {
+    if(!selectedFile.value) {
+        error.value = "Please select a file to summarize"
+        return
+    }
+    isLoading.value = true
+    error.value = null
+
+    try {
+        const formData = new FormData()
+        formData.append('file', selectedFile.value)
+
+    }
+}
+</script>
