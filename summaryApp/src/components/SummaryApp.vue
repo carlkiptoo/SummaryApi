@@ -16,7 +16,7 @@
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="summary" class="summary">
       <h3>Summary</h3>
-      <p>{{ summary }}</p>
+      <p>{{ summary.data.summary }}</p>
     </div>
   </div>
 </template>
@@ -49,6 +49,23 @@ const summarizeDocument = async() => {
         const formData = new FormData()
         formData.append('file', selectedFile.value)
 
+        const response = await axios.post(
+            'https://api.apyhub.com//ai/summarize-documents/file',
+            formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'apy-token': apiToken
+                }
+            }
+        )
+
+        summary.value = response.data
+
+    } catch (error) {
+        error.value = err.response?.data?.message || 'An error occured while summarizing document'
+    } finally {
+        isLoading.value = false
     }
 }
 </script>
