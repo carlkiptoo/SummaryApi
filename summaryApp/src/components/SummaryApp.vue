@@ -29,7 +29,6 @@ const selectedFile = ref(null)
 const isLoading = ref(false)
 const error = ref(null)
 const summary = ref(null)
-const apiToken = 'APY0w0DZ5FAewhBoIhW5WsgxbIQY7iLe970UZ7VwQFBpkAE63kwW7UKbQFxfdfigh'
 
 const handleFileUpload = (event) => {
     selectedFile.value = event.target.files[0]
